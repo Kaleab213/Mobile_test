@@ -1,0 +1,26 @@
+workflows:
+  hello-world:
+    name: Hello world workflow
+    scripts:
+      - echo "Hello, world!"
+    instance_type: mac_pro
+    max_build_duration: 100
+    environment:
+      flutter: stable
+      xcode: latest
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - "*"
+    scripts:
+      - name: Get Flutter Packages
+        script: flutter packages pub get
+      - name: Build apk
+        script: flutter build apk --release
+      - name: Build ios
+        script: flutter build ios
+    publishing:
+      email:
+        recipients:
+          - kaleabtibebu400@gmail.com
