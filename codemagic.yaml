@@ -1,25 +1,22 @@
 workflows:
-  hello-world:
-    name: Hello world workflow
-    instance_type: mac_mini_m1
-    max_build_duration: 100
-    environment:
-      flutter: stable
-      xcode: latest
-    triggering:
-      events:
-        - push
-      branch_patterns:
-        - pattern: "*"
-        - include: true
-    scripts:
-      - name: Get Flutter Packages
-        script: flutter packages pub get
-      - name: Build apk
-        script: flutter build apk --release
-      - name: Build ios
-        script: flutter build ios
-    publishing:
-      email:
-        recipients:
-          - kaleabtibebu400@gmail.com
+  hello-world:
+    name: Hello world workflow
+    instance_type: mac_mini_m1
+    max_build_duration: 100
+    environment:
+      flutter: stable
+      xcode: latest
+    triggering:
+      events:
+        - push
+    scripts:
+      - name: Get Flutter Packages
+        script: flutter packages pub get
+      - name: Build apk
+        script: flutter build apk --release
+      - name: Build ios
+        script: flutter build ios --release --no-codesign
+    publishing:
+      email:
+        recipients:
+          - kaleabtibebu400@gmail.com
