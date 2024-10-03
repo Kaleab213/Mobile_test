@@ -15,6 +15,7 @@ workflows:
     scripts:
       - script: keychain initialize
       - script: keychain add-certificates
+      - script: keychain add-provisioning-profile
       - script: xcode-project use-profiles
       - script: flutter packages pub get
       - name: Flutter build ipa
