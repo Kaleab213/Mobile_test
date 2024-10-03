@@ -1,21 +1,31 @@
 workflows:
   hello-world:
     name: Hello world workflow
-    instance_type: mac_mini_m1
-    max_build_duration: 100
     environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.aladia.io.app
       flutter: stable
       xcode: latest
+    instance_type: mac_mini_m1
+    max_build_duration: 100
     triggering:
       events:
         - push
     scripts:
-      - name: Get Flutter Packages
-        script: flutter packages pub get
+      - script: keychain initialize
+      - script: keychain add-certificates
+      - script: xcode-project use-profiles
+      - script: flutter packages pub get
+      - name: Flutter build ipa
+        script: |
+          flutter build ipa
       - name: Build apk
         script: flutter build apk --release
       - name: Build ios
-        script: flutter build ios --release --no-codesign
+        script: flutter build ios --release
+    artifacts:
+      - build/ios/ipa/*.ipa
     publishing:
       email:
         recipients:
