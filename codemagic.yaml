@@ -17,9 +17,6 @@ workflows:
       - script: keychain add-certificates
       - script: xcode-project use-profiles
       - script: flutter packages pub get
-      - name: Flutter build ipa
-        script: |
-          flutter build ipa
       - name: Build apk
         script: flutter build apk --release
       - name: Build ios
